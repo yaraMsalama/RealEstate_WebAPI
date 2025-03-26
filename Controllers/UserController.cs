@@ -4,7 +4,6 @@ using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.ViewModels.User;
 using System;
 using System.IO;
 using System.Linq;
@@ -166,7 +165,7 @@ namespace RealEstate_WebAPI.Controllers
 
             var agent = await _agentService.GetAgentByUserIdAsync(userId);
 
-            var viewModel = new UserProfileViewModel
+            var viewModel = new UserInfoDTO
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
@@ -191,7 +190,7 @@ namespace RealEstate_WebAPI.Controllers
 
         // PUT: api/User/Profile
         [HttpPut("Profile")]
-        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileViewModel model)
+        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -262,7 +261,7 @@ namespace RealEstate_WebAPI.Controllers
                             ProfileImageUrl = user.UserImageURL
                         };
 
-                        await _agentService.CreateAgentAsync(agent);
+                        //object value = await _agentService.CreateAgentAsync(agent);
                     }
                     else
                     {
