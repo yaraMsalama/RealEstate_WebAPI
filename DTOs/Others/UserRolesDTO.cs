@@ -1,4 +1,4 @@
-﻿namespace RealEstate_WebAPI.DTOs.ResponseDTOs
+﻿namespace RealEstate_WebAPI.DTOs.Others
 {
     public class UserRolesDTO
     {

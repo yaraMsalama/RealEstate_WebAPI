@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RealEstate_WebAPI.DTOs.Others;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services.Interfaces;
 using System;

@@ -2,7 +2,7 @@
 using RealEstate_WebAPI.Data;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories.Interfaces;
-using RealEstate_WebAPI.DTOs.ResponseDTOs; // Use DTOs instead of ViewModels
+using RealEstate_WebAPI.DTOs.ResponseDTOs; 
 using System.Threading.Tasks;
 using RealEstate_WebAPI.Infrastructure.Repositories;
 
@@ -52,10 +52,10 @@ namespace RealEstate_WebAPI.Repositories
             return new AgentResponseDTO
             {
                 Id = agent.Id,
-                FullName = $"{agent.User.FirstName} {agent.User.LastName}", // Fixed concatenation with a space
+                FullName = $"{agent.User.FirstName} {agent.User.LastName}",
                 Email = agent.User.Email,
                 PhoneNumber = agent.User.PhoneNumber,
-                PropertyCount = agent.Properties?.Count ?? 0, // Null check for safety
+                PropertyCount = agent.Properties?.Count ?? 0,
                 LicenseNumber = agent.LicenseNumber,
                 Agency = agent.Agency,
                 Biography = agent.Biography,
@@ -63,5 +63,7 @@ namespace RealEstate_WebAPI.Repositories
                 ProfileImageUrl = agent.User.UserImageURL
             };
         }
+
+
     }
 }

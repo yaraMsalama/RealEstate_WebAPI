@@ -1,6 +1,6 @@
 ﻿using RealEstate_WebAPI.Repositories;
 using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.ViewModels.Agent;
+using RealEstate_WebAPI.DTOs.ResponseDTOs;
 
 namespace RealEstate_WebAPI.Repositories.Interfaces
 {
@@ -13,6 +13,6 @@ namespace RealEstate_WebAPI.Repositories.Interfaces
         //Task UpdateAsync(Agent agent);
         //Task DeleteAsync(int id);
 
-        Task<AgentViewModel> GetByPropertyIdAsync(int propertyId);
+        Task<AgentResponseDTO> GetByPropertyIdAsync(int propertyId);
     }
 }

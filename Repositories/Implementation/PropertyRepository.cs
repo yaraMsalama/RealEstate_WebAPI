@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using RealEstate_WebAPI.Data;
+using RealEstate_WebAPI.DTOs.Others;
 using RealEstate_WebAPI.Infrastructure.Repositories;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
@@ -31,7 +32,7 @@ namespace RealEstate_WebAPI.Repositories.Implementation
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Property>> SearchAsync(PropertySearchFilterViewModel filter)
+        public async Task<IEnumerable<Property>> SearchAsync(PropertySearchFilterDTO filter)
         {
             var query = _context.Properties
               .Include(p => p.Agent)

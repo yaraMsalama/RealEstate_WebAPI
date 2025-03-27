@@ -1,25 +1,20 @@
-﻿using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.ViewModels.Property;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using RealEstate_WebAPI.DTOs;
+using RealEstate_WebAPI.DTOs.ResponseDTOs;
 
 namespace RealEstate_WebAPI.Services
 {
-    public interface IPropertyService : IBaseService<Property, PropertyViewModel>
+    public interface IPropertyService : IBaseService<Property, PropertyResponseDTO>
     {
-        Task<PropertyViewModel> GetPropertyByIdAsync(int id, string userId);
-        Task<IEnumerable<PropertyViewModel>> GetAllPropertiesAsync(string userId);
-        Task<IEnumerable<PropertyViewModel>> GetPropertiesByAgentIdAsync(string agentId, string userId);
-        Task<PropertySearchViewModel> SearchPropertiesAsync(PropertySearchFilterViewModel filter, string userId, int page, int pageSize);
-
-
-        Task<int> AddPropertyAsync(PropertyViewModel property, string agentId);
-        Task<int> UpdatePropertyAsync(PropertyViewModel model, string userId);
+        Task<PropertyResponseDTO> GetPropertyByIdAsync(int id, string userId);
+        Task<IEnumerable<PropertyResponseDTO>> GetAllPropertiesAsync(string userId);
+        Task<IEnumerable<PropertyResponseDTO>> GetPropertiesByAgentIdAsync(string agentId, string userId);
+        Task<PropertySearchResponseDTO> SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize);
+        Task<int> AddPropertyAsync(PropertyResponseDTO property, string agentId);
+        Task<int> UpdatePropertyAsync(PropertyResponseDTO model, string userId);
         Task DeletePropertyAsync(int id, string agentId);
-
-
-        Task UpdatePropertyImagesAsync(PropertyImagesViewModel viewModel);
+        Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto);
         Task DeletePropertyImageAsync(int propertyId, string imageUrl);
-
-        Task<PropertyViewModel> GetPropertyViewModelByIdAsync(int id);
-
+        Task<PropertyResponseDTO> GetPropertyViewModelByIdAsync(int id);
     }
 }

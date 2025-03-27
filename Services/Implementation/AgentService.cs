@@ -3,7 +3,6 @@ using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.ViewModels.Agent;
 
 namespace RealEstate_WebAPI.Services
 {

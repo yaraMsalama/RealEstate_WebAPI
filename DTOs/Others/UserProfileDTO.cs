@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http; // For IFormFile
 using System.ComponentModel.DataAnnotations;
 
-namespace RealEstate_WebAPI.Models
+namespace RealEstate_WebAPI.DTOs.Others
 {
     public class UserProfileDTO
     {

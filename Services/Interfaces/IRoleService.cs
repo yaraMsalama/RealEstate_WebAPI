@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.DTOs.ResponseDTOs; // Use DTOs instead of ViewModels
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using RealEstate_WebAPI.DTOs.Others;
 
 namespace RealEstate_WebAPI.Services
 {
@@ -10,8 +10,8 @@ namespace RealEstate_WebAPI.Services
     {
         Task<IEnumerable<IdentityRole>> GetAllRolesAsync();
         Task<bool> CreateRoleAsync(string roleName); // Inferred type as string
-        Task<EditRoleDTO> GetRoleForEditAsync(string id);
-        Task<bool> UpdateRoleAsync(EditRoleDTO model);
+        Task<EditUserRolesDTO> GetRoleForEditAsync(string id);
+        Task<bool> UpdateRoleAsync(EditUserRolesDTO model);
         Task<bool> DeleteRoleAsync(string id);
 
         // User-Role management

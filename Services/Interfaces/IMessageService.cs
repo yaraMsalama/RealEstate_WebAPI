@@ -1,6 +1,5 @@
 ﻿using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services;
-using RealEstate_WebAPI.ViewModels.Property;
 
 namespace RealEstate_WebAPI.Services.Interfaces
 {

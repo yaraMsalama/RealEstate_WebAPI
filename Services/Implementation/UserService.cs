@@ -3,14 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
 using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.ViewModels.Admin;
-using RealEstate_WebAPI.ViewModels.Agent;
-using RealEstate_WebAPI.ViewModels.Property;
-using RealEstate_WebAPI.ViewModels.User;
+using RealEstate_WebAPI.DTOs.Others;
+
 
 namespace RealEstate_WebAPI.Services
 {
-    public class UserService : BaseService<ApplicationUser, UserProfileViewModel>, IUserService
+    public class UserService : BaseService<ApplicationUser, UserProfileDTO>, IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;

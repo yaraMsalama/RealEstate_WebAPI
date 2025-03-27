@@ -5,8 +5,8 @@ using RealEstate_WebAPI.Repositories;
 using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.ViewModels.Common;
 using RealEstate_WebAPI.Repositories.Interfaces;
+using RealEstate_WebAPI.DTOs.ResponseDTOs;
 
 namespace RealEstate_WebAPI.Services.Implementation
 {
@@ -50,7 +50,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             return review;
         }
 
-        public async Task<Review> UpdateAsync(int id, ReviewViewModel model, string userId)
+        public async Task<Review> UpdateAsync(int id, ReviewResponseDTO model, string userId)
         {
             var reviews = await _repository.FindAsync(r => r.Id == id);
             var review = reviews.FirstOrDefault();

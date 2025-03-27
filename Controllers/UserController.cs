@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services;
-using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services.Interfaces;
 using System;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using RealEstate_WebAPI.DTOs.Others;
 
 namespace RealEstate_WebAPI.Controllers
 {

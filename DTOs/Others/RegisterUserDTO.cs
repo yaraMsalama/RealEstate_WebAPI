@@ -1,4 +1,6 @@
-﻿namespace RealEstate_WebAPI.Models
+﻿using RealEstate_WebAPI.Models;
+
+namespace RealEstate_WebAPI.DTOs.Others
 {
     public class RegisterUserDTO
     {

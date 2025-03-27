@@ -1,11 +1,10 @@
-﻿using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.ViewModels.Admin;
-using RealEstate_WebAPI.ViewModels.Agent;
-using RealEstate_WebAPI.ViewModels.User;
+﻿using RealEstate_WebAPI.DTOs.Others;
+using RealEstate_WebAPI.Models;
+
 
 namespace RealEstate_WebAPI.Services
 {
-    public interface IUserService : IBaseService<ApplicationUser, UserProfileViewModel>
+    public interface IUserService : IBaseService<ApplicationUser, UserProfileDTO>
     {
         Task<ApplicationUser> GetUserByIdAsync(string id);
         Task UpdateUserAsync(ApplicationUser user);
