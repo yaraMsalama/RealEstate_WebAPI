@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.ViewModels.User;
-using RealEstate_WebAPI.Services.Interfaces;
-
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace RealEstate_WebAPI.Controllers
 {
@@ -22,12 +18,13 @@ namespace RealEstate_WebAPI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IAgentService _agentService;
-        private readonly IJwtService _jwtService; 
+        private readonly IJwtService _jwtService;
+
         public AccountController(
-                 UserManager<ApplicationUser> userManager,
-                 SignInManager<ApplicationUser> signInManager,
-                 IAgentService agentService,
-                 IJwtService jwtService)
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IAgentService agentService,
+            IJwtService jwtService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,7 +33,7 @@ namespace RealEstate_WebAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterUserViewModel userFromRequest)
+        public async Task<IActionResult> Register([FromBody] RegisterUserDTO userFromRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -78,8 +75,11 @@ namespace RealEstate_WebAPI.Controllers
                     await _userManager.AddToRoleAsync(userModel, "User");
                 }
 
+                // Get user roles
+                var roles = await _userManager.GetRolesAsync(userModel);
+
                 // Generate JWT token
-                var token = await _jwtService.GenerateToken(userModel);
+                var token = _jwtService.GenerateToken(userModel.Id, userModel.UserName, roles);
 
                 return Ok(new
                 {
@@ -101,7 +101,7 @@ namespace RealEstate_WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginUserViewModel userFromRequest)
+        public async Task<IActionResult> Login([FromBody] LoginUserDTO userFromRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -122,8 +122,11 @@ namespace RealEstate_WebAPI.Controllers
                 new Claim("UserType", userFromDatabase.UserType.ToString())
             };
 
+            // Get user roles
+            var roles = await _userManager.GetRolesAsync(userFromDatabase);
+
             // Generate JWT token
-            var token = await _jwtService.GenerateToken(userFromDatabase, claims);
+            var token = _jwtService.GenerateToken(userFromDatabase.Id, userFromDatabase.UserName, roles);
 
             return Ok(new
             {
@@ -146,7 +149,6 @@ namespace RealEstate_WebAPI.Controllers
         public IActionResult ExternalLogin(string provider)
         {
             // External login needs to be reimplemented for API - this is a placeholder
-            // In a SPA/API scenario, this would typically be handled differently
             return BadRequest(new { Message = "External login not implemented for the API" });
         }
 
@@ -160,7 +162,7 @@ namespace RealEstate_WebAPI.Controllers
             if (user == null)
                 return NotFound();
 
-            return Ok(new
+            var userInfo = new UserInfoDTO
             {
                 Id = user.Id,
                 Username = user.UserName,
@@ -169,7 +171,9 @@ namespace RealEstate_WebAPI.Controllers
                 LastName = user.LastName,
                 UserType = user.UserType.ToString(),
                 PhoneNumber = user.PhoneNumber
-            });
+            };
+
+            return Ok(userInfo);
         }
 
         [HttpGet("user-types")]
@@ -177,7 +181,8 @@ namespace RealEstate_WebAPI.Controllers
         {
             var userTypes = Enum.GetValues(typeof(UserType))
                 .Cast<UserType>()
-                .Select(e => new {
+                .Select(e => new
+                {
                     Value = (int)e,
                     Name = e.ToString()
                 });

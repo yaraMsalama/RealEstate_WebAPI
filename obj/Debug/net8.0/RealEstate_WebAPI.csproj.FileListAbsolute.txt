@@ -1,0 +1,8 @@
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.csproj.AssemblyReference.cache
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.AssemblyInfoInputs.cache
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.AssemblyInfo.cs
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.csproj.CoreCompileInputs.cache
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\ff\obj\Debug\net8.0\RealEstate_WebAPI.sourcelink.json
