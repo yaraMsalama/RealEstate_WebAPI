@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\ff\\RealEstate_WebAPI.csproj": {}
+    "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\RealEstate_WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\ff\\RealEstate_WebAPI.csproj": {
+    "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\RealEstate_WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\ff\\RealEstate_WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\RealEstate_WebAPI.csproj",
         "projectName": "RealEstate_WebAPI",
-        "projectPath": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\ff\\RealEstate_WebAPI.csproj",
+        "projectPath": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\RealEstate_WebAPI.csproj",
         "packagesPath": "C:\\Users\\ts\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\ff\\obj\\",
+        "outputPath": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

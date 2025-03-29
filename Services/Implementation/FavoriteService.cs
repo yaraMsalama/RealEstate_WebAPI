@@ -2,17 +2,18 @@
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
 using RealEstate_WebAPI.Services;
-using RealEstate_WebAPI.ViewModels.Property;
 using RealEstate_WebAPI.Repositories.Implementation;
 using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.ViewModels.Agent;
 using System.ComponentModel.DataAnnotations.Schema;
 using RealEstate_WebAPI.Services;
+using RealEstate_WebAPI.DTOs;
+using RealEstate_WebAPI.DTOs.Others;
+using static RealEstate_WebAPI.DTOs.Others.PropertyFavoriteDTO;
 
 namespace RealEstate_WebAPI.Services.Implementation
 {
 
-    public class FavoriteService : BaseService<Favorite, PropertyViewModel>, IFavoriteService
+    public class FavoriteService : BaseService<Favorite, PropertyResponseDTO>, IFavoriteService
     {
         /// <summary>
         /// /mapper
@@ -41,11 +42,11 @@ namespace RealEstate_WebAPI.Services.Implementation
             await _repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<PropertyFavoriteViewModel>> GetFavoritesByUserIdAsync(string userId)
+        public async Task<IEnumerable<PropertyFavoriteDTO>> GetFavoritesByUserIdAsync(string userId)
         {
             var favorites = await _repository.GetAllByUserIdAsync(userId);
 
-            var result = new List<PropertyFavoriteViewModel>();
+            var result = new List<PropertyFavoriteDTO>();
             foreach (var favorite in favorites)
             {
                 result.Add(FromFavorite(favorite));
@@ -75,12 +76,10 @@ namespace RealEstate_WebAPI.Services.Implementation
                     throw new InvalidOperationException("Favorite repository is not initialized");
                 }
 
-                // Call the repository method to check if the property is a favorite
                 return await _repository.IsFavoriteAsync(propertyId, userId);
             }
             catch (Exception ex)
             {
-                // Log the exception (replace with your actual logging mechanism)
                 // _logger.LogError(ex, $"Error checking favorite status for property {propertyId} and user {userId}");
 
                 // Return false as a fallback instead of propagating the exception
@@ -94,34 +93,29 @@ namespace RealEstate_WebAPI.Services.Implementation
         }
 
 
-        public static PropertyFavoriteViewModel FromFavorite(Favorite favorite)
+        public static PropertyFavoriteDto FromFavorite(Favorite favorite)
         {
             var property = favorite.Property;
-            return new PropertyFavoriteViewModel
+            return new PropertyFavoriteDto
             {
-                FavoriteId = favorite.Id,
+                Id = favorite.Id,
                 UserId = favorite.UserId,
                 DateSaved = favorite.CreatedAt,
-
                 PropertyId = property.Id,
                 Title = property.Title,
                 Description = property.Description,
                 Price = property.Price,
-
                 Address = property.Address,
                 City = property.City,
                 State = property.State,
                 ZipCode = property.ZipCode,
-
                 SquareFeet = property.Area,
                 Bedrooms = property.Bedrooms,
                 Bathrooms = property.Bathrooms,
-
-                Type = property.Type,
-                Status = property.Status,
-                Cover = property.FeaturedImage,
-
+                Type = property.Type.ToString(), // Convert PropertyType enum to string
+                Status = property.Status.ToString(), // Convert PropertyStatus enum to string
+                CoverImageUrl = property.FeaturedImage
             };
         }
     }
-}
+    }

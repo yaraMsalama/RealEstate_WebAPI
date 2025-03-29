@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RealEstate_WebAPI.DTOs.Others;
 using RealEstate_WebAPI.Services;
-using RealEstate_WebAPI.ViewModels.Roles;
 using System.Threading.Tasks;
 
 namespace RealEstate_WebAPI.Controllers
@@ -28,18 +28,18 @@ namespace RealEstate_WebAPI.Controllers
 
         // POST: api/Role
         [HttpPost]
-        public async Task<IActionResult> AddRole([FromBody] RoleViewModel roleFromRequest)
+        public async Task<IActionResult> AddRole([FromBody] UserRolesDTO roleFromRequest)
         {
             if (ModelState.IsValid)
             {
                 var result = await _roleService.CreateRoleAsync(roleFromRequest);
                 if (result)
                 {
-                    return Ok(new { Message = $"Role '{roleFromRequest.RoleName}' created successfully!" });
+                    return Ok(new { Message = $"Role '{roleFromRequest.UserName}' created successfully!" });
                 }
                 else
                 {
-                    return BadRequest(new { Message = $"Role '{roleFromRequest.RoleName}' already exists or couldn't be created." });
+                    return BadRequest(new { Message = $"Role '{roleFromRequest.UserName}' already exists or couldn't be created." });
                 }
             }
             return BadRequest(ModelState);

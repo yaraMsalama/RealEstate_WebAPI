@@ -1,6 +1,5 @@
 ﻿using RealEstate_WebAPI.DTOs;
 using RealEstate_WebAPI.Models;
-using RealEstate_WebAPI.ViewModels.Property;
 
 namespace RealEstate_WebAPI.Repositories
 {
@@ -8,7 +7,7 @@ namespace RealEstate_WebAPI.Repositories
     {
         Task<int> AddAsync(Property entity);
         Task<IEnumerable<Property>> GetByAgentIdAsync(string agentId);
-        Task<IEnumerable<Property>> SearchAsync(PropertySearchFilterViewModel filter);
-        Task SearchAsync(PropertySearchFilterDTO filter);
+        Task<IEnumerable<Property>> SearchAsync(PropertySearchFilterDTO filter);
+        //Task SearchAsync(PropertySearchFilterDTO filter);
     }
 }

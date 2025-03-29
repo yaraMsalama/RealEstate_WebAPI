@@ -24,5 +24,6 @@ namespace RealEstate_WebAPI.Services
 
         Task<IdentityRole> GetRoleByIdAsync(string id);
         Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName);
+        Task<bool> CreateRoleAsync(UserRolesDTO roleFromRequest);
     }
 }

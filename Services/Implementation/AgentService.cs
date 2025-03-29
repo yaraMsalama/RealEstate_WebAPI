@@ -3,10 +3,11 @@ using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using RealEstate_WebAPI.Services.Interfaces;
+using RealEstate_WebAPI.DTOs.ResponseDTOs;
 
 namespace RealEstate_WebAPI.Services
 {
-    public class AgentService : BaseService<Agent, AgentViewModel>, IAgentService
+    public class AgentService : BaseService<Agent, AgentResponseDTO>, IAgentService
     {
         private readonly IAgentRepository _agentRepository;
 
@@ -30,7 +31,7 @@ namespace RealEstate_WebAPI.Services
         }
 
         // get agent by property id
-        public async Task<AgentViewModel> GetAgentByPropertyIdAsync(int propertyId)
+        public async Task<AgentResponseDTO> GetAgentByPropertyIdAsync(int propertyId)
         {
             var agent = await _agentRepository.GetByPropertyIdAsync(propertyId);
             return agent;
@@ -50,9 +51,9 @@ namespace RealEstate_WebAPI.Services
         }
 
         // map agent to agent view model
-        public AgentViewModel MapAgentToAgentViewModel(Agent agent)
+        public AgentResponseDTO MapAgentToAgentViewModel(Agent agent)
         {
-            return new AgentViewModel
+            return new AgentResponseDTO
             {
                 FullName = agent.User.FirstName + " " + agent.User.LastName,
                 Email = agent.User.Email,
@@ -67,7 +68,7 @@ namespace RealEstate_WebAPI.Services
         }
 
         // map agent view model to agent
-        public Agent MapAgentViewModelToAgent(AgentViewModel agentViewModel)
+        public Agent MapAgentViewModelToAgent(AgentResponseDTO agentViewModel)
         {
             return new Agent
             {

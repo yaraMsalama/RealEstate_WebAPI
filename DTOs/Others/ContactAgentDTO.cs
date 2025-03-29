@@ -7,5 +7,6 @@
         public string SenderEmail { get; set; }
         public string SenderPhone { get; set; }
         public string MessageText { get; set; }
+        public string AgentId { get; internal set; }
     }
 }

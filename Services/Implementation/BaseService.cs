@@ -6,9 +6,9 @@ using RealEstate_WebAPI.Repositories;
 
 namespace RealEstate_WebAPI.Services
 {
-    public class BaseService<TEntity, TViewModel> : IBaseService<TEntity, TViewModel>
-      where TEntity : class
-      where TViewModel : class
+    public class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
+          where TEntity : class
+          where TDto : class
     {
         protected readonly IBaseRepository<TEntity> _repository;
         protected readonly IMapper _mapper;
@@ -19,28 +19,28 @@ namespace RealEstate_WebAPI.Services
             _mapper = mapper;
         }
 
-        public async Task<TViewModel> GetByIdAsync(object id)
+        public async Task<TDto> GetByIdAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            return entity == null ? null : _mapper.Map<TViewModel>(entity);
+            return entity == null ? null : _mapper.Map<TDto>(entity);
         }
 
-        public async Task<IEnumerable<TViewModel>> GetAllAsync()
+        public async Task<IEnumerable<TDto>> GetAllAsync()
         {
             var entities = await _repository.GetAllAsync();
-            return MapToViewModels(entities);
+            return MapToDtos(entities);
         }
 
-        public async Task<TViewModel> CreateAsync(TViewModel viewModel)
+        public async Task<TDto> CreateAsync(TDto dto)
         {
-            var entity = MapToEntity(viewModel);
+            var entity = MapToEntity(dto);
             await _repository.AddAsync(entity);
-            return _mapper.Map<TViewModel>(entity);
+            return _mapper.Map<TDto>(entity);
         }
 
-        public async Task UpdateAsync(TViewModel viewModel)
+        public async Task UpdateAsync(TDto dto)
         {
-            var entity = MapToEntity(viewModel);
+            var entity = MapToEntity(dto);
             await _repository.UpdateAsync(entity);
         }
 
@@ -71,16 +71,14 @@ namespace RealEstate_WebAPI.Services
             return selectList;
         }
 
-        protected IEnumerable<TViewModel> MapToViewModels(IEnumerable<TEntity> entities)
+        protected IEnumerable<TDto> MapToDtos(IEnumerable<TEntity> entities)
         {
-            return _mapper.Map<IEnumerable<TViewModel>>(entities);
+            return _mapper.Map<IEnumerable<TDto>>(entities);
         }
 
-        public TEntity MapToEntity(TViewModel viewModel)
+        public TEntity MapToEntity(TDto dto)
         {
-            return _mapper.Map<TEntity>(viewModel);
+            return _mapper.Map<TEntity>(dto);
         }
-
-
     }
 }

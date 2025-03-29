@@ -3,7 +3,7 @@ using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.ViewModels.Property;
+using RealEstate_WebAPI.DTOs.Others;
 
 namespace RealEstate_WebAPI.Services.Implementation
 {
@@ -27,17 +27,16 @@ namespace RealEstate_WebAPI.Services.Implementation
             return await _messageRepository.GetByAgentIdAsync(agentId);
         }
 
-
-        public async Task SendContactMessageAsync(ContactAgentViewModel model)
+        public async Task SendContactMessageAsync(ContactAgentDTO contact)
         {
             var message = new Message
             {
-                PropertyId = model.PropertyId,
-                AgentId = model.AgentId,
-                SenderName = model.ContactName,
-                SenderEmail = model.ContactEmail,
-                SenderPhone = model.ContactPhone,
-                MessageText = model.ContactMessage,
+                PropertyId = contact.PropertyId,
+                AgentId = contact.AgentId,
+                SenderName = contact.SenderName,
+                SenderEmail = contact.SenderEmail,
+                SenderPhone = contact.SenderPhone,
+                MessageText = contact.MessageText,
                 CreatedAt = DateTime.UtcNow,
                 IsRead = false
             };
@@ -45,6 +44,8 @@ namespace RealEstate_WebAPI.Services.Implementation
             await _messageRepository.AddAsync(message);
             await _messageRepository.SaveChangesAsync();
         }
+
+       
 
         public async Task UpdateMessageAsync(Message message)
         {

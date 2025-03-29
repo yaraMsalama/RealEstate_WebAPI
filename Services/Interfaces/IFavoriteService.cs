@@ -1,4 +1,5 @@
-﻿using RealEstate_WebAPI.DTOs.Others;
+﻿using RealEstate_WebAPI.DTOs;
+using RealEstate_WebAPI.DTOs.Others;
 using RealEstate_WebAPI.DTOs.ResponseDTOs;
 using RealEstate_WebAPI.Models;
 

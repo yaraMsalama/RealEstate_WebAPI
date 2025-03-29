@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ax5uZMfIedg=",
+  "dgSpecHash": "l5zSDnoQyuY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\ff\\RealEstate_WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\RealEstate_WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ts\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\ts\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
