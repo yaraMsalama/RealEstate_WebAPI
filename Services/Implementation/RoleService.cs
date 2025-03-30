@@ -39,13 +39,13 @@ namespace RealEstate_WebAPI.Services
             return result.Succeeded;
         }
 
-        public async Task<DTOs.ResponseDTOs.EditRoleDTO> GetRoleForEditAsync(string id)
+        public async Task<EditRoleDTO> GetRoleForEditAsync(string id)
         {
             var role = await _roleRepository.GetRoleByIdAsync(id);
             if (role == null)
                 return null;
 
-            var model = new DTOs.ResponseDTOs.edi
+            var model = new EditRoleDTO
             {
                 RoleId = role.Id,
                 RoleName = role.Name
@@ -216,4 +216,10 @@ namespace RealEstate_WebAPI.Services
             return await _roleRepository.GetUsersInRoleAsync(roleName);
         }
     }
+    public class EditRoleDTO
+    {
+        public string RoleId { get; set; }
+        public string RoleName { get; set; }
+    }
+   
 }

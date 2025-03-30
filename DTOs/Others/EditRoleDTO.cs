@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_WebAPI.DTOs.Others
 {
-    public class EditUserRolesDTO
+    public class EditRoleDTO
     {
         public string UserId { get; set; }
         public string UserName { get; set; }

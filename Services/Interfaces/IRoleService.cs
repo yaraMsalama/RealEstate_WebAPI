@@ -9,7 +9,7 @@ namespace RealEstate_WebAPI.Services
     public interface IRoleService
     {
         Task<IEnumerable<IdentityRole>> GetAllRolesAsync();
-        Task<bool> CreateRoleAsync(string roleName); // Inferred type as string
+        Task<bool> CreateRoleAsync(string roleName); 
         Task<EditUserRolesDTO> GetRoleForEditAsync(string id);
         Task<bool> UpdateRoleAsync(EditUserRolesDTO model);
         Task<bool> DeleteRoleAsync(string id);

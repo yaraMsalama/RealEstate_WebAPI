@@ -3,9 +3,7 @@ using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
 using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Repositories.Implementation;
-using RealEstate_WebAPI.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.DTOs;
 using RealEstate_WebAPI.DTOs.Others;
 using static RealEstate_WebAPI.DTOs.Others.PropertyFavoriteDTO;
@@ -13,7 +11,7 @@ using static RealEstate_WebAPI.DTOs.Others.PropertyFavoriteDTO;
 namespace RealEstate_WebAPI.Services.Implementation
 {
 
-    public class FavoriteService : BaseService<Favorite, PropertyResponseDTO>, IFavoriteService
+    public class FavoriteService : BaseService<Favorite, PropertyResponseDto>, IFavoriteService
     {
         /// <summary>
         /// /mapper
@@ -54,7 +52,6 @@ namespace RealEstate_WebAPI.Services.Implementation
             return result;
         }
 
-        // In FavoriteService.cs
         public async Task<bool> IsFavoriteAsync(int propertyId, string userId)
         {
             // Input validation

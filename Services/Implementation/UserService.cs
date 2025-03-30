@@ -62,8 +62,7 @@ namespace RealEstate_WebAPI.Services
             // Add the user to the role
             await _userManager.AddToRoleAsync(user, role);
 
-            // If you still need to update the user in your repository
-            await _userRepository.UpdateAsync(user);
+      await _userRepository.UpdateAsync(user);
         }
     }
 }

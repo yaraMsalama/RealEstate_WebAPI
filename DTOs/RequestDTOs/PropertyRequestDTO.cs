@@ -1,9 +1,12 @@
-﻿using RealEstate_WebAPI.Models;
+﻿
+using Microsoft.AspNetCore.Http;
+using RealEstate_WebAPI.Models;
 
 namespace RealEstate_WebAPI.DTOs.Request
 {
-    public class PropertyRequestDTO
+    public class PropertyRequestDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -19,7 +22,8 @@ namespace RealEstate_WebAPI.DTOs.Request
         public PropertyType Type { get; set; }
         public PropertyStatus Status { get; set; }
         public string? AgentId { get; set; }
-        public string? FeaturedImage { get; set; }
+        public IFormFile? FeaturedImage { get; set; }
+        public List<IFormFile>? AdditionalImages { get; set; }
         public int? YearBuilt { get; set; }
     }
 }

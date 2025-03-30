@@ -6,6 +6,8 @@ namespace RealEstate_WebAPI.DTOs
 {
     public class PropertyRequestDto
     {
+        internal object Id;
+
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

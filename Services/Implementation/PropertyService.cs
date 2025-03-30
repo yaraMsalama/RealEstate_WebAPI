@@ -7,8 +7,8 @@ using RealEstate_WebAPI.DTOs;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using RealEstate_WebAPI.DTOs.Request;
-using RealEstate_WebAPI.DTOs.ResponseDTOs; 
-using RealEstate_WebAPI.DTOs.Request; 
+using RealEstate_WebAPI.DTOs.ResponseDTOs;
+using RealEstate_WebAPI.DTOs.Others;
 
 namespace RealEstate_WebAPI.Services.Implementation
 {
@@ -92,9 +92,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             return await MapPropertiesToDtos(properties, userId);
         }
 
-        public async Task<PropertySearchFilterDTO> SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize)
-
-
+        public async Task<PropertySearchResponseDto> SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize)
         {
             var properties = await _propertyRepository.SearchAsync(filter);
             int totalItems = properties.Count();
@@ -106,7 +104,7 @@ namespace RealEstate_WebAPI.Services.Implementation
 
             var propertyDtos = await MapPropertiesToDtos(paginatedProperties, userId);
 
-            return new PropertySearchFilterDTO
+            return new PropertySearchResponseDto
             {
                 Properties = propertyDtos.ToList(),
                 Filters = filter,
@@ -231,7 +229,7 @@ namespace RealEstate_WebAPI.Services.Implementation
                 FeaturedImageUrl = property.FeaturedImage,
                 ImageUrls = property.Images?.Select(i => i.ImageUrl).ToList() ?? new List<string>(),
                 IsFavorite = isFavorite,
-                YearBuilt = (int)property.YearBuilt
+                YearBuilt = property.YearBuilt
             };
         }
 

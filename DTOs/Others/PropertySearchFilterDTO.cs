@@ -1,4 +1,5 @@
-﻿using RealEstate_WebAPI.Models;
+﻿using RealEstate_WebAPI.DTOs.Others;
+using RealEstate_WebAPI.Models;
 
 namespace RealEstate_WebAPI.DTOs
 {
@@ -19,6 +20,9 @@ namespace RealEstate_WebAPI.DTOs
         public int? MaxDaysOnMarket { get; set; }
         public string SortBy { get; set; }
         public bool SortDescending { get; set; }
-        public PropertyType? Type { get; set; } 
+        public PropertyType? Type { get; set; }
+        public PaginationDto Pagination { get; internal set; }
+        public PropertySearchFilterDTO Filters { get; internal set; }
+        public List<PropertyResponseDto> Properties { get; internal set; }
     }
 }

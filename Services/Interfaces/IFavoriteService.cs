@@ -5,7 +5,7 @@ using RealEstate_WebAPI.Models;
 
 namespace RealEstate_WebAPI.Services
 {
-    public interface IFavoriteService : IBaseService<Favorite, PropertyResponseDTO>
+    public interface IFavoriteService : IBaseService<Favorite, PropertyResponseDto>
     {
         Task<IEnumerable<PropertyFavoriteDTO>> GetFavoritesByUserIdAsync(string userId);
         Task<bool> IsFavoriteAsync(int propertyId, string userId);
