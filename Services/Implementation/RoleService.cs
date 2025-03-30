@@ -66,9 +66,9 @@ namespace RealEstate_WebAPI.Services
             return model;
         }
 
-        public async Task<bool> UpdateRoleAsync(DTOs.ResponseDTOs.EditRoleDTO dTO)
+        public async Task<bool> UpdateRoleAsync(DTOs.Others.EditRoleDTO dTO)
         {
-            var role = await _roleRepository.GetRoleByIdAsync(dTO.RoleId);
+            var role = await _roleRepository.GetRoleByIdAsync(dTO.UserId);
             if (role == null)
                 return false;
 
@@ -134,7 +134,7 @@ namespace RealEstate_WebAPI.Services
             var userRoles = await _roleRepository.GetUserRolesAsync(user);
             var allRoles = await _roleRepository.GetAllRolesAsync();
 
-            var model = new DTOs.ResponseDTOs.EditUserRolesDTO
+            var model = new DTOs.Others.EditUserRolesDTO
             {
                 UserId = user.Id,
                 UserName = user.UserName,

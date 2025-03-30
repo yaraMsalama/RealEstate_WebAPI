@@ -8,7 +8,7 @@ namespace RealEstate_WebAPI.Repositories
     {
         Task<int> AddAsync(Property entity);
         Task<IEnumerable<Property>> GetByAgentIdAsync(string agentId);
-        Task<Action<IMappingOperationOptions<object, void>>> GetByIdAsync(object id);
+        new Task<Property> GetByIdAsync(object id);
         Task<IEnumerable<Property>> SearchAsync(PropertySearchFilterDTO filter);
         //Task SearchAsync(PropertySearchFilterDTO filter);
     }

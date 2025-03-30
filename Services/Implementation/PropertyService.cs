@@ -33,7 +33,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<int> AddPropertyAsync(PropertyRequestDto propertyDto, string agentId)
+        public async Task<int> AddPropertyAsync(DTOs.PropertyRequestDto propertyDto, string agentId)
         {
             var property = _mapper.Map<Property>(propertyDto);
             property.AgentId = agentId;
@@ -118,7 +118,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             };
         }
 
-        public async Task<int> UpdatePropertyAsync(PropertyRequestDto model, string userId)
+        public async Task<int> UpdatePropertyAsync(DTOs.PropertyRequestDto model, string userId)
         {
             var property = await _propertyRepository.GetByIdAsync(model.Id);
             if (property == null || property.AgentId != userId) return 0;
@@ -229,7 +229,7 @@ namespace RealEstate_WebAPI.Services.Implementation
                 FeaturedImageUrl = property.FeaturedImage,
                 ImageUrls = property.Images?.Select(i => i.ImageUrl).ToList() ?? new List<string>(),
                 IsFavorite = isFavorite,
-                YearBuilt = property.YearBuilt
+                //YearBuilt = property.YearBuilt
             };
         }
 
@@ -289,5 +289,15 @@ namespace RealEstate_WebAPI.Services.Implementation
 
             return $"/images/properties/{propertyId}/{fileName}";
         }
+
+        //Task<PropertySearchFilterDTO> IPropertyService.SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
