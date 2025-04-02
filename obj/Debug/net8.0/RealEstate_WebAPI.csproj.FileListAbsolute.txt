@@ -161,3 +161,4 @@ C:\Users\ts\Source\Repos\RealEstate_WebAPI\YAR\obj\Debug\net8.0\refint\RealEstat
 C:\Users\ts\Source\Repos\RealEstate_WebAPI\YAR\obj\Debug\net8.0\RealEstate_WebAPI.pdb
 C:\Users\ts\Source\Repos\RealEstate_WebAPI\YAR\obj\Debug\net8.0\RealEstate_WebAPI.genruntimeconfig.cache
 C:\Users\ts\Source\Repos\RealEstate_WebAPI\YAR\obj\Debug\net8.0\ref\RealEstate_WebAPI.dll
+C:\Users\ts\Source\Repos\RealEstate_WebAPI\YAR\bin\Debug\net8.0\RealEstate_WebAPI.staticwebassets.runtime.json

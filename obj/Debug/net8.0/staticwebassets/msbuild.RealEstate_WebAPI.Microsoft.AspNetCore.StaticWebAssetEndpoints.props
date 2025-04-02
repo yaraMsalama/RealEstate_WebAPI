@@ -1,0 +1,16 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/RealEstate_WebAPI/api-tester.html">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\api-tester.html'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-laOGQJpErT8MYMU5C8DZ2f5to7hEyH9iI4VjTarwtz0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"12853"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022laOGQJpErT8MYMU5C8DZ2f5to7hEyH9iI4VjTarwtz0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 01:04:38 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/RealEstate_WebAPI/api-tester.tah43c62kn.html">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\api-tester.html'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"tah43c62kn"},{"Name":"integrity","Value":"sha256-laOGQJpErT8MYMU5C8DZ2f5to7hEyH9iI4VjTarwtz0="},{"Name":"label","Value":"_content/RealEstate_WebAPI/api-tester.html"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"12853"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022laOGQJpErT8MYMU5C8DZ2f5to7hEyH9iI4VjTarwtz0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 01:04:38 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

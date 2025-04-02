@@ -76,10 +76,8 @@ namespace RealEstate_WebAPI.Controllers
                     await _userManager.AddToRoleAsync(userModel, "User");
                 }
 
-                // Get user roles
                 var roles = await _userManager.GetRolesAsync(userModel);
 
-                // Generate JWT token
                 var token = _jwtService.GenerateToken(userModel.Id, userModel.UserName, roles);
 
                 return Ok(new
@@ -91,7 +89,6 @@ namespace RealEstate_WebAPI.Controllers
                 });
             }
 
-            // Return errors if registration failed
             var errors = new List<string>();
             foreach (var error in result.Errors)
             {
@@ -142,14 +139,12 @@ namespace RealEstate_WebAPI.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Logout()
         {
-            // In JWT-based authentication, the client handles logout by removing the token
             return Ok(new { Message = "Logged out successfully" });
         }
 
         [HttpPost("external-login")]
         public IActionResult ExternalLogin(string provider)
         {
-            // External login needs to be reimplemented for API - this is a placeholder
             return BadRequest(new { Message = "External login not implemented for the API" });
         }
 

@@ -1,0 +1,679 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Villanueva WebAPI Tester</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        .api-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .endpoint {
+            margin-bottom: 20px;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .get {
+            background-color: #61affe;
+            color: white;
+        }
+
+        .post {
+            background-color: #49cc90;
+            color: white;
+        }
+
+        .put {
+            background-color: #fca130;
+            color: white;
+        }
+
+        .delete {
+            background-color: #f93e3e;
+            color: white;
+        }
+
+        .url {
+            font-family: monospace;
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .try-it {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .try-it:hover {
+                background-color: #1a252f;
+            }
+
+        .request-body {
+            width: 100%;
+            min-height: 100px;
+            font-family: monospace;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .response {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 5px 5px 0 0;
+        }
+
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 10px 16px;
+                transition: 0.3s;
+            }
+
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                .tab button.active {
+                    background-color: #2c3e50;
+                    color: white;
+                }
+
+        .tabcontent {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .active-tab {
+            display: block;
+        }
+
+        .param-input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aesthetic Villanueva WebAPI Tester</h1>
+        <p>Test your API endpoints with this interactive page</p>
+        <div><input type="text" id="jwt-token" class="param-input" placeholder="Paste JWT token here" style="margin-bottom: 15px;"></div>
+
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'Account')">Account</button>
+            <button class="tablinks" onclick="openTab(event, 'Property')">Property</button>
+            <button class="tablinks" onclick="openTab(event, 'User')">User</button>
+            <button class="tablinks" onclick="openTab(event, 'Role')">Role</button>
+            <button class="tablinks" onclick="openTab(event, 'Home')">Home</button>
+        </div>
+
+        <!-- Account Tab -->
+        <div id="Account" class="tabcontent active-tab">
+            <div class="api-section">
+                <h2>Account Endpoints</h2>
+
+                <!-- Register -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Account/register</span>
+                    <button class="try-it" onclick="toggleRequest('register')">Try it out</button>
+                    <div id="register-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="register-body">
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "username": "johndoe",
+  "password": "Password123!",
+  "userType": 1,
+  "phoneNumber": "1234567890"
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('POST', '/api/Account/register', 'register-body', 'register-response')">Execute</button>
+                        <div class="response hidden" id="register-response"></div>
+                    </div>
+                </div>
+
+                <!-- Login -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Account/login</span>
+                    <button class="try-it" onclick="toggleRequest('login')">Try it out</button>
+                    <div id="login-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="login-body">
+{
+  "username": "johndoe",
+  "password": "Password123!"
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('POST', '/api/Account/login', 'login-body', 'login-response')">Execute</button>
+                        <div class="response hidden" id="login-response"></div>
+                    </div>
+                </div>
+
+                <!-- Logout -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Account/logout</span>
+                    <button class="try-it" onclick="sendRequest('POST', '/api/Account/logout', null, 'logout-response')">Execute</button>
+                    <div class="response hidden" id="logout-response"></div>
+                </div>
+
+                <!-- User Info -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Account/user-info</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Account/user-info', null, 'user-info-response')">Execute</button>
+                    <div class="response hidden" id="user-info-response"></div>
+                </div>
+
+                <!-- User Types -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Account/user-types</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Account/user-types', null, 'user-types-response')">Execute</button>
+                    <div class="response hidden" id="user-types-response"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Tab -->
+        <div id="Property" class="tabcontent">
+            <div class="api-section">
+                <h2>Property Endpoints</h2>
+
+                <!-- Get Agent Properties -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Property/agent-properties</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Property/agent-properties', null, 'agent-properties-response')">Execute</button>
+                    <div class="response hidden" id="agent-properties-response"></div>
+                </div>
+
+                <!-- Search Properties -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Property/search</span>
+                    <button class="try-it" onclick="toggleRequest('search-properties')">Try it out</button>
+                    <div id="search-properties-request" class="hidden">
+                        <h4>Query Parameters</h4>
+                        <input type="text" id="search-term" class="param-input" placeholder="Search term">
+                        <button class="try-it" onclick="sendRequest('GET', `/api/Property/search?searchTerm=${document.getElementById('search-term').value}`, null, 'search-properties-response')">Execute</button>
+                        <div class="response hidden" id="search-properties-response"></div>
+                    </div>
+                </div>
+
+                <!-- Get Property by ID -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Property/{id}</span>
+                    <button class="try-it" onclick="toggleRequest('get-property')">Try it out</button>
+                    <div id="get-property-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="property-id" class="param-input" placeholder="Property ID">
+                        <button class="try-it" onclick="sendRequest('GET', `/api/Property/${document.getElementById('property-id').value}`, null, 'get-property-response')">Execute</button>
+                        <div class="response hidden" id="get-property-response"></div>
+                    </div>
+                </div>
+
+                <!-- Create Property -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Property</span>
+                    <button class="try-it" onclick="toggleRequest('create-property')">Try it out</button>
+                    <div id="create-property-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="create-property-body">
+{
+  "title": "Beautiful Family Home",
+  "description": "Spacious 4 bedroom house with garden",
+  "price": 350000,
+  "area": 180,
+  "bedrooms": 4,
+  "bathrooms": 2,
+  "address": "123 Main St",
+  "city": "Cairo",
+  "state": "Cairo",
+  "zipCode": "12345",
+  "latitude": 30.0444,
+  "longitude": 31.2357,
+  "type": 1,
+  "status": 0,
+  "yearBuilt": 2010
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('POST', '/api/Property', 'create-property-body', 'create-property-response')">Execute</button>
+                        <div class="response hidden" id="create-property-response"></div>
+                    </div>
+                </div>
+
+                <!-- Update Property -->
+                <div class="endpoint">
+                    <span class="method put">PUT</span>
+                    <span class="url">/api/Property/{id}</span>
+                    <button class="try-it" onclick="toggleRequest('update-property')">Try it out</button>
+                    <div id="update-property-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="update-property-id" class="param-input" placeholder="Property ID">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="update-property-body">
+{
+  "id": 1,
+  "title": "Updated Family Home",
+  "description": "Updated spacious 4 bedroom house",
+  "price": 360000,
+  "area": 180,
+  "bedrooms": 4,
+  "bathrooms": 2,
+  "address": "123 Main St",
+  "city": "Cairo",
+  "state": "Cairo",
+  "zipCode": "12345",
+  "latitude": 30.0444,
+  "longitude": 31.2357,
+  "type": 1,
+  "status": 0,
+  "yearBuilt": 2010
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('PUT', `/api/Property/${document.getElementById('update-property-id').value}`, 'update-property-body', 'update-property-response')">Execute</button>
+                        <div class="response hidden" id="update-property-response"></div>
+                    </div>
+                </div>
+
+                <!-- Delete Property -->
+                <div class="endpoint">
+                    <span class="method delete">DELETE</span>
+                    <span class="url">/api/Property/{id}</span>
+                    <button class="try-it" onclick="toggleRequest('delete-property')">Try it out</button>
+                    <div id="delete-property-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="delete-property-id" class="param-input" placeholder="Property ID">
+                        <button class="try-it" onclick="sendRequest('DELETE', `/api/Property/${document.getElementById('delete-property-id').value}`, null, 'delete-property-response')">Execute</button>
+                        <div class="response hidden" id="delete-property-response"></div>
+                    </div>
+                </div>
+
+                <!-- Toggle Favorite -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Property/favorite/{propertyId}</span>
+                    <button class="try-it" onclick="toggleRequest('toggle-favorite')">Try it out</button>
+                    <div id="toggle-favorite-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="favorite-property-id" class="param-input" placeholder="Property ID">
+                        <button class="try-it" onclick="sendRequest('POST', `/api/Property/favorite/${document.getElementById('favorite-property-id').value}`, null, 'toggle-favorite-response')">Execute</button>
+                        <div class="response hidden" id="toggle-favorite-response"></div>
+                    </div>
+                </div>
+
+                <!-- Get Favorites -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Property/favorites</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Property/favorites', null, 'get-favorites-response')">Execute</button>
+                    <div class="response hidden" id="get-favorites-response"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Tab -->
+        <div id="User" class="tabcontent">
+            <div class="api-section">
+                <h2>User Endpoints</h2>
+
+                <!-- Get Profile -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/User/Profile</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/User/Profile', null, 'user-profile-response')">Execute</button>
+                    <div class="response hidden" id="user-profile-response"></div>
+                </div>
+
+                <!-- Add Review -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/User/Reviews</span>
+                    <button class="try-it" onclick="toggleRequest('add-review')">Try it out</button>
+                    <div id="add-review-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="add-review-body">
+{
+  "propertyId": 1,
+  "rating": 5,
+  "comment": "Great property!"
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('POST', '/api/User/Reviews', 'add-review-body', 'add-review-response')">Execute</button>
+                        <div class="response hidden" id="add-review-response"></div>
+                    </div>
+                </div>
+
+                <!-- Get Review -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/User/Reviews/{reviewId}</span>
+                    <button class="try-it" onclick="toggleRequest('get-review')">Try it out</button>
+                    <div id="get-review-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="review-id" class="param-input" placeholder="Review ID">
+                        <button class="try-it" onclick="sendRequest('GET', `/api/User/Reviews/${document.getElementById('review-id').value}`, null, 'get-review-response')">Execute</button>
+                        <div class="response hidden" id="get-review-response"></div>
+                    </div>
+                </div>
+
+                <!-- Remove Review -->
+                <div class="endpoint">
+                    <span class="method delete">DELETE</span>
+                    <span class="url">/api/User/Reviews/{reviewId}</span>
+                    <button class="try-it" onclick="toggleRequest('remove-review')">Try it out</button>
+                    <div id="remove-review-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="remove-review-id" class="param-input" placeholder="Review ID">
+                        <button class="try-it" onclick="sendRequest('DELETE', `/api/User/Reviews/${document.getElementById('remove-review-id').value}`, null, 'remove-review-response')">Execute</button>
+                        <div class="response hidden" id="remove-review-response"></div>
+                    </div>
+                </div>
+
+                <!-- Get Property Reviews -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/User/Properties/{propertyId}/Reviews</span>
+                    <button class="try-it" onclick="toggleRequest('get-property-reviews')">Try it out</button>
+                    <div id="get-property-reviews-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="number" id="property-reviews-id" class="param-input" placeholder="Property ID">
+                        <button class="try-it" onclick="sendRequest('GET', `/api/User/Properties/${document.getElementById('property-reviews-id').value}/Reviews`, null, 'get-property-reviews-response')">Execute</button>
+                        <div class="response hidden" id="get-property-reviews-response"></div>
+                    </div>
+                </div>
+
+                <!-- Update Profile -->
+                <div class="endpoint">
+                    <span class="method put">PUT</span>
+                    <span class="url">/api/User/Profile</span>
+                    <button class="try-it" onclick="toggleRequest('update-profile')">Try it out</button>
+                    <div id="update-profile-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="update-profile-body">
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phoneNumber": "1234567890",
+  "isAgent": false
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('PUT', '/api/User/Profile', 'update-profile-body', 'update-profile-response')">Execute</button>
+                        <div class="response hidden" id="update-profile-response"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role Tab -->
+        <div id="Role" class="tabcontent">
+            <div class="api-section">
+                <h2>Role Endpoints</h2>
+
+                <!-- Get All Roles -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Role</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Role', null, 'get-roles-response')">Execute</button>
+                    <div class="response hidden" id="get-roles-response"></div>
+                </div>
+
+                <!-- Add Role -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Role</span>
+                    <button class="try-it" onclick="toggleRequest('add-role')">Try it out</button>
+                    <div id="add-role-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="add-role-body">
+{
+  "userName": "NewRole"
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('POST', '/api/Role', 'add-role-body', 'add-role-response')">Execute</button>
+                        <div class="response hidden" id="add-role-response"></div>
+                    </div>
+                </div>
+
+                <!-- Get Users with Roles -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Role/ManageUserRoles</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Role/ManageUserRoles', null, 'manage-user-roles-response')">Execute</button>
+                    <div class="response hidden" id="manage-user-roles-response"></div>
+                </div>
+
+                <!-- Get User Roles for Edit -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Role/EditUserRoles/{userId}</span>
+                    <button class="try-it" onclick="toggleRequest('get-user-roles')">Try it out</button>
+                    <div id="get-user-roles-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="text" id="user-roles-id" class="param-input" placeholder="User ID">
+                        <button class="try-it" onclick="sendRequest('GET', `/api/Role/EditUserRoles/${document.getElementById('user-roles-id').value}`, null, 'get-user-roles-response')">Execute</button>
+                        <div class="response hidden" id="get-user-roles-response"></div>
+                    </div>
+                </div>
+
+                <!-- Edit User Roles -->
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="url">/api/Role/EditUserRoles</span>
+                    <button class="try-it" onclick="toggleRequest('edit-user-roles')">Try it out</button>
+                    <div id="edit-user-roles-request" class="hidden">
+                        <h4>Request body</h4>
+                        <textarea class="request-body" id="edit-user-roles-body">
+{
+  "userId": "user-id-here",
+  "selectedRoleId": "role-id-here"
+}
+                        </textarea>
+                        <button class="try-it" onclick="sendRequest('POST', '/api/Role/EditUserRoles', 'edit-user-roles-body', 'edit-user-roles-response')">Execute</button>
+                        <div class="response hidden" id="edit-user-roles-response"></div>
+                    </div>
+                </div>
+
+                <!-- Delete Role -->
+                <div class="endpoint">
+                    <span class="method delete">DELETE</span>
+                    <span class="url">/api/Role/{id}</span>
+                    <button class="try-it" onclick="toggleRequest('delete-role')">Try it out</button>
+                    <div id="delete-role-request" class="hidden">
+                        <h4>Parameter</h4>
+                        <input type="text" id="delete-role-id" class="param-input" placeholder="Role ID">
+                        <button class="try-it" onclick="sendRequest('DELETE', `/api/Role/${document.getElementById('delete-role-id').value}`, null, 'delete-role-response')">Execute</button>
+                        <div class="response hidden" id="delete-role-response"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Tab -->
+        <div id="Home" class="tabcontent">
+            <div class="api-section">
+                <h2>Home Endpoints</h2>
+
+                <!-- Get Home Data -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Home</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Home', null, 'home-data-response')">Execute</button>
+                    <div class="response hidden" id="home-data-response"></div>
+                </div>
+
+                <!-- Get Property Types -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Home/property-types</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Home/property-types', null, 'property-types-response')">Execute</button>
+                    <div class="response hidden" id="property-types-response"></div>
+                </div>
+
+                <!-- Get Cities -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Home/cities</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Home/cities', null, 'cities-response')">Execute</button>
+                    <div class="response hidden" id="cities-response"></div>
+                </div>
+
+                <!-- Get About Info -->
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="url">/api/Home/about</span>
+                    <button class="try-it" onclick="sendRequest('GET', '/api/Home/about', null, 'about-response')">Execute</button>
+                    <div class="response hidden" id="about-response"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let baseUrl = 'http://localhost:5000'; // Adjust to your API base URL
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].className = tabcontent[i].className.replace(" active-tab", "");
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).className += " active-tab";
+            evt.currentTarget.className += " active";
+        }
+
+        function toggleRequest(id) {
+            const element = document.getElementById(id + '-request');
+            element.classList.toggle('hidden');
+        }
+
+        function sendRequest(method, url, bodyElementId, responseElementId) {
+            const responseElement = document.getElementById(responseElementId);
+            responseElement.classList.remove('hidden');
+            responseElement.textContent = "Sending request...";
+
+            let body = null;
+            if (bodyElementId) {
+                try {
+                    body = JSON.parse(document.getElementById(bodyElementId).value);
+                } catch (e) {
+                    responseElement.textContent = "Error: Invalid JSON in request body";
+                    return;
+                }
+            }
+
+            const token = document.getElementById('jwt-token').value;
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            };
+
+            if (token) {
+                options.headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            if (body) {
+                options.body = JSON.stringify(body);
+            }
+
+            fetch(baseUrl + url, options)
+                .then(response => {
+                    const statusText = `${response.status} ${response.statusText}`;
+                    return response.text().then(text => ({ statusText, text }));
+                })
+                .then(({ statusText, text }) => {
+                    try {
+                        const data = JSON.parse(text);
+                        responseElement.textContent = `${statusText}\n${JSON.stringify(data, null, 2)}`;
+                    } catch {
+                        responseElement.textContent = `${statusText}\n${text}`;
+                    }
+                })
+                .catch(error => {
+                    responseElement.textContent = "Error: " + error.message;
+                });
+        }
+    </script>
+</body>
+</html>

@@ -19,13 +19,11 @@ namespace RealEstate_WebAPI.Controllers
             _propertyService = propertyService;
         }
 
-        // Get featured and recent properties
         [HttpGet]
         public async Task<IActionResult> GetHomeData()
         {
             try
             {
-                // Get properties from the database
                 var allProperties = await _propertyService.GetAllPropertiesAsync(null);
                 var propertiesList = allProperties.ToList();
 
@@ -80,7 +78,6 @@ namespace RealEstate_WebAPI.Controllers
         [HttpGet("about")]
         public IActionResult GetAboutInfo()
         {
-            // Replace with actual about information relevant to your API
             return Ok(new
             {
                 ApiName = "RealEstate API",
