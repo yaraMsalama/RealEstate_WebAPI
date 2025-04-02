@@ -127,7 +127,7 @@
     "Parameters": [
       {
         "Name": "propertyDto",
-        "Type": "RealEstate_WebAPI.DTOs.Request.PropertyRequestDto",
+        "Type": "RealEstate_WebAPI.DTOs.PropertyRequestDto",
         "IsRequired": true
       }
     ],
@@ -164,7 +164,7 @@
       },
       {
         "Name": "propertyDto",
-        "Type": "RealEstate_WebAPI.DTOs.Request.PropertyRequestDto",
+        "Type": "RealEstate_WebAPI.DTOs.PropertyRequestDto",
         "IsRequired": true
       }
     ],
@@ -611,17 +611,17 @@
       },
       {
         "Name": "Filters.Filters.Properties",
-        "Type": "System.Collections.Generic.List\u00601[[RealEstate_WebAPI.DTOs.PropertyResponseDto, RealEstate_WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[RealEstate_WebAPI.ResponseDTOs.PropertyResponseDto, RealEstate_WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
         "Name": "Filters.Properties",
-        "Type": "System.Collections.Generic.List\u00601[[RealEstate_WebAPI.DTOs.PropertyResponseDto, RealEstate_WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[RealEstate_WebAPI.ResponseDTOs.PropertyResponseDto, RealEstate_WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
         "Name": "Properties",
-        "Type": "System.Collections.Generic.List\u00601[[RealEstate_WebAPI.DTOs.PropertyResponseDto, RealEstate_WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[RealEstate_WebAPI.ResponseDTOs.PropertyResponseDto, RealEstate_WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {

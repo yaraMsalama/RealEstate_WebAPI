@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RealEstate_WebAPI.DTOs.Request
+namespace RealEstate_WebAPI.DTOs.RequestDTOs
 {
     public class ReviewRequestDTO
     {

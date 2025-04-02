@@ -1,14 +1,10 @@
 ﻿using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
 using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
 using RealEstate_WebAPI.DTOs;
-using RealEstate_WebAPI.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
-using RealEstate_WebAPI.DTOs.Request;
 using RealEstate_WebAPI.DTOs.ResponseDTOs;
 using RealEstate_WebAPI.DTOs.Others;
+using RealEstate_WebAPI.ResponseDTOs;
 
 namespace RealEstate_WebAPI.Services.Implementation
 {
@@ -33,10 +29,31 @@ namespace RealEstate_WebAPI.Services.Implementation
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<int> AddPropertyAsync(DTOs.PropertyRequestDto propertyDto, string agentId)
+        public async Task<int> AddPropertyAsync(DTOs.PropertyRequestDto propertyDto, string userId)
         {
-            var property = _mapper.Map<Property>(propertyDto);
-            property.AgentId = agentId;
+
+            // manua map
+            Property property = new Property()
+            {
+                Title = propertyDto.Title,
+                Description = propertyDto.Description,
+                Price = propertyDto.Price,
+                Area = propertyDto.Area,
+                Bedrooms = propertyDto.Bedrooms,
+                Bathrooms = propertyDto.Bathrooms,
+                Address = propertyDto.Address,
+                City = propertyDto.City,
+                State = propertyDto.State,
+                ZipCode = propertyDto.ZipCode,
+                Latitude = propertyDto.Latitude,
+                Longitude = propertyDto.Longitude,
+                Type = propertyDto.Type,
+                Status = propertyDto.Status,
+                YearBuilt = propertyDto.YearBuilt
+
+            };
+
+            property.AgentId = userId;
             property.CreatedAt = DateTime.UtcNow;
             property.UpdatedAt = DateTime.UtcNow;
             property.Images = new List<PropertyImage>();
@@ -178,7 +195,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             {
                 if (!string.IsNullOrEmpty(property.FeaturedImage))
                     DeleteImageFromServer(property.FeaturedImage);
-                property.FeaturedImage = await SaveImageAsync(dto.FeaturedImage, property.Id);
+                property.FeaturedImage = await SaveImageAsync(dto.FeaturedImage.ToString(), property.Id);
                 await _propertyRepository.UpdateAsync(property);
             }
 
@@ -186,7 +203,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             {
                 foreach (var image in dto.NewImages)
                 {
-                    string imagePath = await SaveImageAsync(image, property.Id);
+                    string imagePath = await SaveImageAsync(image.ToString(), property.Id);
                     await _propertyImageRepository.AddAsync(new PropertyImage
                     {
                         PropertyId = property.Id,
@@ -244,18 +261,21 @@ namespace RealEstate_WebAPI.Services.Implementation
             return dtos;
         }
 
-        private async Task<string> SaveImageAsync(IFormFile imageFile, int propertyId)
+        private async Task<string> SaveImageAsync(string imageFile, int propertyId)
         {
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "properties", propertyId.ToString());
             Directory.CreateDirectory(uploadsFolder);
 
-            string uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(imageFile.FileName)}";
+            string uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(imageFile)}";
             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
+            //using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //{
+            //    //string to ifile
+            //    var imageFile = new MemoryStream(Convert.FromBase64String(imageFile));
+
+            //    await imageFile.CopyToAsync();
+            //}
 
             return $"/images/properties/{propertyId}/{uniqueFileName}";
         }
@@ -290,19 +310,5 @@ namespace RealEstate_WebAPI.Services.Implementation
             return $"/images/properties/{propertyId}/{fileName}";
         }
 
-        Task<PropertySearchFilterDTO> IPropertyService.SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task AddPropertyAsync(DTOs.Request.PropertyRequestDto dto, string userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RealEstate_WebAPI.DTOs.Others;
+using RealEstate_WebAPI.ResponseDTOs;
 
 namespace RealEstate_WebAPI.DTOs.ResponseDTOs
 {

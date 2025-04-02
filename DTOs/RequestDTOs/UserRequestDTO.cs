@@ -1,6 +1,6 @@
 ﻿using RealEstate_WebAPI.Models;
 
-namespace RealEstate_WebAPI.DTOs.Request
+namespace RealEstate_WebAPI.DTOs.RequestDTOs
 {
     public class UserRequestDTO
     {

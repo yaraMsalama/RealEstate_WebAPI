@@ -1,4 +1,4 @@
-﻿namespace RealEstate_WebAPI.DTOs.Request
+﻿namespace RealEstate_WebAPI.DTOs.RequestDTOs
 {
     public class FavoriteRequestDTO
     {

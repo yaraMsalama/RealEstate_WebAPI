@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
-using RealEstate_WebAPI.Services;
-using RealEstate_WebAPI.Repositories.Implementation;
-using System.ComponentModel.DataAnnotations.Schema;
-using RealEstate_WebAPI.DTOs;
 using RealEstate_WebAPI.DTOs.Others;
-using static RealEstate_WebAPI.DTOs.Others.PropertyFavoriteDTO;
+using RealEstate_WebAPI.ResponseDTOs;
 
 namespace RealEstate_WebAPI.Services.Implementation
 {
@@ -40,14 +36,15 @@ namespace RealEstate_WebAPI.Services.Implementation
             await _repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<PropertyFavoriteDTO>> GetFavoritesByUserIdAsync(string userId)
+        public async Task<IEnumerable<PropertyFavoriteDto>> GetFavoritesByUserIdAsync(string userId)
         {
             var favorites = await _repository.GetAllByUserIdAsync(userId);
 
-            var result = new List<PropertyFavoriteDTO>();
+            var result = new List<PropertyFavoriteDto>();
+
             foreach (var favorite in favorites)
             {
-           //     result.Add(FromFavorite(favorite));
+                result.Add(FromFavorite(favorite));
             }
             return result;
         }
@@ -115,4 +112,4 @@ namespace RealEstate_WebAPI.Services.Implementation
             };
         }
     }
-    }
+}

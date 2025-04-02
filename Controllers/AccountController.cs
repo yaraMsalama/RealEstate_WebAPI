@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate_WebAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase

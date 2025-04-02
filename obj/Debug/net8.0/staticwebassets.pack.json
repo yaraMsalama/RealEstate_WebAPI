@@ -1,12 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\wwwroot\\api-tester.html",
+      "Id": "D:\\00_ITI\\WebAPI\\wwwroot\\api-tester.html",
       "PackagePath": "staticwebassets\\api-tester.html"
-    },
-    {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RealEstate_WebAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RealEstate_WebAPI.Microsoft.AspNetCore.StaticWebAssets.props",

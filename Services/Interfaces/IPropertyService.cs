@@ -1,9 +1,8 @@
 ﻿using RealEstate_WebAPI.DTOs;
-using RealEstate_WebAPI.DTOs.Request;
 using RealEstate_WebAPI.DTOs.ResponseDTOs;
 using RealEstate_WebAPI.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using RealEstate_WebAPI.ResponseDTOs;
+using PropertyRequestDto = RealEstate_WebAPI.DTOs.PropertyRequestDto;
 
 namespace RealEstate_WebAPI.Services
 {
@@ -12,12 +11,11 @@ namespace RealEstate_WebAPI.Services
         Task<PropertyResponseDto> GetPropertyByIdAsync(int id, string userId);
         Task<IEnumerable<PropertyResponseDto>> GetAllPropertiesAsync(string userId);
         Task<IEnumerable<PropertyResponseDto>> GetPropertiesByAgentIdAsync(string agentId, string userId);
-        Task<PropertySearchFilterDTO> SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize);
-        Task<int> AddPropertyAsync(DTOs.PropertyRequestDto property, string agentId);
-        Task<int> UpdatePropertyAsync(DTOs.PropertyRequestDto model, string userId);
+        Task<PropertySearchResponseDto> SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize);
+        Task<int> AddPropertyAsync(PropertyRequestDto property, string userId);
+        Task<int> UpdatePropertyAsync(PropertyRequestDto model, string userId);
         Task DeletePropertyAsync(int id, string agentId);
-        Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto);
+        //Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto);
         Task DeletePropertyImageAsync(int propertyId, string imageUrl);
-        Task AddPropertyAsync(DTOs.Request.PropertyRequestDto dto, string userId);
     }
 }

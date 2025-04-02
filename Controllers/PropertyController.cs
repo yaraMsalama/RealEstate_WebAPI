@@ -6,13 +6,12 @@ using System.Security.Claims;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.DTOs.Request;
 using RealEstate_WebAPI.DTOs.Others;
 using RealEstate_WebAPI.DTOs;
-using PropertyRequestDto = RealEstate_WebAPI.DTOs.Request.PropertyRequestDto;
 
 namespace RealEstate_WebAPI.Controllers
 {
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class PropertyController : ControllerBase
@@ -65,7 +64,7 @@ namespace RealEstate_WebAPI.Controllers
                 // Add favorite status to each property in the results
                 foreach (var property in searchResults.Properties)
                 {
-                   
+
                     property.IsFavorite = favorites.Any(f => f.PropertyId == property.Id);
                 }
             }
@@ -128,6 +127,7 @@ namespace RealEstate_WebAPI.Controllers
         // POST: api/Property
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Agent")]
+        //[]
         public async Task<IActionResult> CreateProperty([FromBody] PropertyRequestDto propertyDto)
         {
             if (!ModelState.IsValid)
