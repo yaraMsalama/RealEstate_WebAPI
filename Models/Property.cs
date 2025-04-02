@@ -45,7 +45,7 @@ namespace RealEstate_WebAPI.Models
         public string? AgentId { get; set; }
 
         [ForeignKey("AgentId")]
-        public ApplicationUser Agent { get; set; }
+        public virtual ApplicationUser Agent { get; set; }
 
         public ICollection<PropertyImage>? Images { get; set; }
 

@@ -217,7 +217,7 @@ namespace RealEstate_WebAPI.Services.Implementation
                 Bedrooms = property.Bedrooms,
                 Bathrooms = property.Bathrooms,
                 Address = property.Address,
-                City = property.City,
+                City = property.City.ToString(),
                 State = property.State,
                 ZipCode = property.ZipCode,
                 Latitude = property.Latitude,

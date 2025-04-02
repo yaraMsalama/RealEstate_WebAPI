@@ -103,7 +103,7 @@ namespace RealEstate_WebAPI.Services.Implementation
                 Description = property.Description,
                 Price = property.Price,
                 Address = property.Address,
-                City = property.City,
+                City = property.City.ToString(), // Convert City enum to string
                 State = property.State,
                 ZipCode = property.ZipCode,
                 SquareFeet = property.Area,

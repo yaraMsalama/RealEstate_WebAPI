@@ -28,12 +28,19 @@ namespace RealEstate_WebAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure cascading delete for Favorite->Property relationship
+            // Fix the Favorites cascade delete
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.Property)
                 .WithMany()
                 .HasForeignKey(f => f.PropertyId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Fix the Property-ApplicationUser relationship
+            modelBuilder.Entity<Property>()
+                .HasOne(p => p.Agent)
+                .WithMany(u => u.Properties)
+                .HasForeignKey(p => p.AgentId)
+                .OnDelete(DeleteBehavior.SetNull); // Or choose appropriate delete behavior
 
             base.OnModelCreating(modelBuilder);
         }

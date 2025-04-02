@@ -16,7 +16,6 @@ using RealEstate_WebAPI.Repositories.Implementation;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using RealEstate_WebAPI.Services.Interfaces;
 using AutoMapper;
-using RealEstate_WebAPI.Mapping;
 
 namespace RealEstate_WebAPI
 {
@@ -50,7 +49,6 @@ namespace RealEstate_WebAPI
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             // Register all services
-            // Register all services
             builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
             builder.Services.AddScoped<IAgentService, AgentService>();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
@@ -59,6 +57,8 @@ namespace RealEstate_WebAPI
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IUserService, UserService>();
+
+            builder.Services.AddAutoMapper(typeof(Program));
 
             // Add authentication (JWT)
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

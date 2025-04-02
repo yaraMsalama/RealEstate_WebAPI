@@ -16,7 +16,7 @@ namespace RealEstate_WebAPI.Models
 
         public string? UserImageURL { get; set; }
 
-        public ICollection<Property>? Properties { get; set; } = new List<Property>();
+        public virtual ICollection<Property>? Properties { get; set; } = new List<Property>();
 
         public ICollection<Favorite>? Favorites { get; set; } = new List<Favorite>();
 

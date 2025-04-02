@@ -55,7 +55,7 @@ namespace RealEstate_WebAPI.Repositories.Implementation
             if (!string.IsNullOrEmpty(filter.Filters.Location))
             {
                 query = query.Where(p =>
-                    p.City.Contains(filter.Filters.Location) ||
+                    p.City.ToString().Contains(filter.Filters.Location) ||
                     p.State.Contains(filter.Filters.Location) ||
                     p.ZipCode.Contains(filter.Filters.Location) ||
                     p.Address.Contains(filter.Filters.Location));
@@ -99,6 +99,8 @@ namespace RealEstate_WebAPI.Repositories.Implementation
 
 
 
-       
+        //public Task SearchAsync(PropertySearchFilterDTO filter)
+        //{
+        //}
     }
 }
