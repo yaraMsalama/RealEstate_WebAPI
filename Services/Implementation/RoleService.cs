@@ -142,6 +142,7 @@ namespace RealEstate_WebAPI.Services
 
             foreach (var userRole in userRoles)
             {
+
                 var user = await _roleRepository.GetUserByIdAsync(userRole.UserId);
                 if (user != null)
                 {
