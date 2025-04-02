@@ -150,8 +150,9 @@ namespace RealEstate_WebAPI.Services
 
                     result.Add(new EditUserRolesDTO
                     {
-                        UserId = userRole.UserId,
-                        UserName = userRole.UserName,
+                        UserId = userRole.UserId
+                        
+                        = userRole.UserName,
                         UserRoles = allRoles.Select(r => new RoleSelection
                         {
                             RoleId = r.Id,
