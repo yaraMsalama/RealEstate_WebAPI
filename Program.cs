@@ -16,6 +16,7 @@ using RealEstate_WebAPI.Repositories.Implementation;
 using RealEstate_WebAPI.Repositories.Interfaces;
 using RealEstate_WebAPI.Services.Interfaces;
 using AutoMapper;
+using RealEstate_WebAPI.Services.RoleSeeder;
 
 namespace RealEstate_WebAPI
 {
@@ -65,7 +66,23 @@ namespace RealEstate_WebAPI
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IUserService, UserService>();
 
+            builder.Services.AddScoped<RoleSeederService>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
+
             builder.Services.AddAutoMapper(typeof(Program));
+
+            // Add Identity
+            using var scope = builder.Services.BuildServiceProvider().CreateScope();
+            var roleSeeder = scope.ServiceProvider.GetRequiredService<RoleSeederService>();
+            roleSeeder.SeedRolesAsync().Wait();
+            roleSeeder.SeedAdminUserAsync().Wait();
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("Agent", policy => policy.RequireRole("Agent"));
+                options.AddPolicy("User", policy => policy.RequireRole("User"));
+            });
 
             // Add authentication (JWT)
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
