@@ -99,8 +99,6 @@ namespace RealEstate_WebAPI.Repositories.Implementation
 
 
 
-        //public Task SearchAsync(PropertySearchFilterDTO filter)
-        //{
-        //}
+       
     }
 }

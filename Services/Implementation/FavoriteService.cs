@@ -47,7 +47,7 @@ namespace RealEstate_WebAPI.Services.Implementation
             var result = new List<PropertyFavoriteDTO>();
             foreach (var favorite in favorites)
             {
-                result.Add(FromFavorite(favorite));
+           //     result.Add(FromFavorite(favorite));
             }
             return result;
         }

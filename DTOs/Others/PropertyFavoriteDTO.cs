@@ -2,7 +2,8 @@
 {
     public class PropertyFavoriteDTO
     {
-      
+        public int PropertyId { get; internal set; }
+
         public class PropertyFavoriteDto
         {
             public int Id { get; set; }

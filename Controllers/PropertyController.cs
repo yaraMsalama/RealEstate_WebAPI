@@ -6,7 +6,10 @@ using System.Security.Claims;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services;
 using RealEstate_WebAPI.Services.Interfaces;
-using RealEstate_WebAPI.ViewModels.Property;
+using RealEstate_WebAPI.DTOs.Request;
+using RealEstate_WebAPI.DTOs.Others;
+using RealEstate_WebAPI.DTOs;
+using PropertyRequestDto = RealEstate_WebAPI.DTOs.Request.PropertyRequestDto;
 
 namespace RealEstate_WebAPI.Controllers
 {
@@ -49,7 +52,7 @@ namespace RealEstate_WebAPI.Controllers
 
         // GET: api/Property/search
         [HttpGet("search")]
-        public async Task<IActionResult> SearchProperties([FromQuery] PropertySearchFilterViewModel filter,
+        public async Task<IActionResult> SearchProperties([FromQuery] PropertySearchFilterDTO filter,
                                                          [FromQuery] int page = 1,
                                                          [FromQuery] int pageSize = 10)
         {
@@ -62,6 +65,7 @@ namespace RealEstate_WebAPI.Controllers
                 // Add favorite status to each property in the results
                 foreach (var property in searchResults.Properties)
                 {
+                   
                     property.IsFavorite = favorites.Any(f => f.PropertyId == property.Id);
                 }
             }
@@ -124,7 +128,7 @@ namespace RealEstate_WebAPI.Controllers
         // POST: api/Property
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Agent")]
-        public async Task<IActionResult> CreateProperty([FromBody] PropertyViewModel viewModel)
+        public async Task<IActionResult> CreateProperty([FromBody] PropertyRequestDto propertyDto)
         {
             if (!ModelState.IsValid)
             {
@@ -132,17 +136,17 @@ namespace RealEstate_WebAPI.Controllers
             }
 
             var userId = GetUserId();
-            var propertyId = await _propertyService.AddPropertyAsync(viewModel, userId);
+            await _propertyService.AddPropertyAsync(propertyDto, userId);
 
-            return CreatedAtAction(nameof(GetProperty), new { id = propertyId }, null);
+            return CreatedAtAction(nameof(GetProperty), new { id = propertyDto.Id }, null);
         }
 
         // PUT: api/Property/5
         [HttpPut("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Agent")]
-        public async Task<IActionResult> UpdateProperty(int id, [FromBody] PropertyViewModel viewModel)
+        public async Task<IActionResult> UpdateProperty(int id, [FromBody] PropertyRequestDto propertyDto)
         {
-            if (id != viewModel.Id)
+            if (id != propertyDto.Id)
             {
                 return BadRequest("Property ID mismatch");
             }
@@ -155,7 +159,7 @@ namespace RealEstate_WebAPI.Controllers
             var userId = GetUserId();
             try
             {
-                await _propertyService.UpdatePropertyAsync(viewModel, userId);
+                await _propertyService.UpdatePropertyAsync(_mapper.Map<RealEstate_WebAPI.DTOs.PropertyRequestDto>(propertyDto), userId);
             }
             catch (Exception ex)
             {
@@ -179,7 +183,7 @@ namespace RealEstate_WebAPI.Controllers
                 return NotFound();
             }
 
-            await _propertyService.DeleteAsync(id);
+            await _propertyService.DeletePropertyAsync(id, userId);
             return NoContent();
         }
 
@@ -227,7 +231,7 @@ namespace RealEstate_WebAPI.Controllers
 
         // POST: api/Property/contact
         [HttpPost("contact")]
-        public async Task<IActionResult> ContactAgent([FromBody] ContactAgentViewModel model)
+        public async Task<IActionResult> ContactAgent([FromBody] ContactAgentDTO contactDto)
         {
             if (!ModelState.IsValid)
             {
@@ -237,15 +241,15 @@ namespace RealEstate_WebAPI.Controllers
             try
             {
                 // Make sure the AgentId is set if it's not coming from the request
-                if (string.IsNullOrEmpty(model.AgentId))
+                if (string.IsNullOrEmpty(contactDto.AgentId))
                 {
                     // Get the property to find its agent
-                    var propertyViewModel = await _propertyService.GetPropertyByIdAsync(model.PropertyId, null);
+                    var propertyViewModel = await _propertyService.GetPropertyByIdAsync(contactDto.PropertyId, null);
 
                     if (propertyViewModel != null)
                     {
                         // Use the AgentId from the PropertyViewModel
-                        model.AgentId = propertyViewModel.AgentId;
+                        contactDto.AgentId = propertyViewModel.AgentId;
                     }
                     else
                     {
@@ -253,7 +257,7 @@ namespace RealEstate_WebAPI.Controllers
                     }
                 }
 
-                await _messageService.SendContactMessageAsync(model);
+                await _messageService.SendContactMessageAsync(contactDto);
                 return Ok(new { success = true, message = "Message sent successfully" });
             }
             catch (Exception ex)

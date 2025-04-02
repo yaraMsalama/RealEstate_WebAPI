@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RealEstate_WebAPI.DTOs.Others;
 using RealEstate_WebAPI.DTOs.ResponseDTOs;
-
 
 namespace RealEstate_WebAPI.Services
 {
@@ -39,13 +39,21 @@ namespace RealEstate_WebAPI.Services
             return result.Succeeded;
         }
 
-        public async Task<EditRoleDTO> GetRoleForEditAsync(string id)
+        public async Task<bool> CreateRoleAsync(UserRolesDTO roleFromRequest)
+        {
+            if (string.IsNullOrEmpty(roleFromRequest?.Roles))
+                return false;
+
+            return await CreateRoleAsync(roleFromRequest.Roles);
+        }
+
+        public async Task<EditUserRolesDTO> GetRoleForEditAsync(string id)
         {
             var role = await _roleRepository.GetRoleByIdAsync(id);
             if (role == null)
                 return null;
 
-            var model = new EditRoleDTO
+            var model = new EditUserRolesDTO
             {
                 RoleId = role.Id,
                 RoleName = role.Name
@@ -66,22 +74,22 @@ namespace RealEstate_WebAPI.Services
             return model;
         }
 
-        public async Task<bool> UpdateRoleAsync(DTOs.Others.EditRoleDTO dTO)
+        public async Task<bool> UpdateRoleAsync(EditUserRolesDTO dto)
         {
-            var role = await _roleRepository.GetRoleByIdAsync(dTO.UserId);
+            var role = await _roleRepository.GetRoleByIdAsync(dto.RoleId);
             if (role == null)
                 return false;
 
-            if (role.Name != dTO.RoleName)
+            if (role.Name != dto.RoleName)
             {
-                var roleExists = await _roleRepository.RoleExistsAsync(dTO.RoleName);
+                var roleExists = await _roleRepository.RoleExistsAsync(dto.RoleName);
                 if (roleExists)
                     return false;
             }
 
             // Update the role name
-            role.Name = dTO.RoleName;
-            role.NormalizedName = dTO.RoleName.ToUpper();
+            role.Name = dto.RoleName;
+            role.NormalizedName = dto.RoleName.ToUpper();
 
             var result = await _roleRepository.UpdateRoleAsync(role);
             return result.Succeeded;
@@ -125,6 +133,38 @@ namespace RealEstate_WebAPI.Services
             return userRolesDTOs;
         }
 
+       
+        async Task<IEnumerable<EditUserRolesDTO>> IRoleService.GetUsersWithRolesAsync()
+        {
+            // Map from UserRolesDTO to EditUserRolesDTO if needed
+            var userRoles = await GetUsersWithRolesAsync();
+            var result = new List<EditUserRolesDTO>();
+
+            foreach (var userRole in userRoles)
+            {
+                var user = await _roleRepository.GetUserByIdAsync(userRole.UserId);
+                if (user != null)
+                {
+                    var userRolesNames = userRole.Roles.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+                    var allRoles = await _roleRepository.GetAllRolesAsync();
+
+                    result.Add(new EditUserRolesDTO
+                    {
+                        UserId = userRole.UserId,
+                        UserName = userRole.UserName,
+                        UserRoles = allRoles.Select(r => new RoleSelection
+                        {
+                            RoleId = r.Id,
+                            RoleName = r.Name,
+                            IsSelected = userRolesNames.Contains(r.Name)
+                        }).ToList()
+                    });
+                }
+            }
+
+            return result;
+        }
+
         public async Task<EditUserRolesDTO> GetUserRolesForEditAsync(string userId)
         {
             var user = await _roleRepository.GetUserByIdAsync(userId);
@@ -134,7 +174,7 @@ namespace RealEstate_WebAPI.Services
             var userRoles = await _roleRepository.GetUserRolesAsync(user);
             var allRoles = await _roleRepository.GetAllRolesAsync();
 
-            var model = new DTOs.Others.EditUserRolesDTO
+            var model = new EditUserRolesDTO
             {
                 UserId = user.Id,
                 UserName = user.UserName,
@@ -216,10 +256,4 @@ namespace RealEstate_WebAPI.Services
             return await _roleRepository.GetUsersInRoleAsync(roleName);
         }
     }
-    public class EditRoleDTO
-    {
-        public string RoleId { get; set; }
-        public string RoleName { get; set; }
-    }
-   
 }

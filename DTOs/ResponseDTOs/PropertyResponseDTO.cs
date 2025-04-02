@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using RealEstate_WebAPI.DTOs.ResponseDTOs;
 using System;
 using System.Collections.Generic;
 
@@ -48,6 +49,7 @@ namespace RealEstate_WebAPI.DTOs
         public List<string> ImageUrls { get; set; }
         public bool IsFavorite { get; set; }
         public int YearBuilt { get; set; }
+        public AgentResponseDTO Agent { get; internal set; }
     }
 
  

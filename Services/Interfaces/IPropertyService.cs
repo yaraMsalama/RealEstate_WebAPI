@@ -18,5 +18,6 @@ namespace RealEstate_WebAPI.Services
         Task DeletePropertyAsync(int id, string agentId);
         Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto);
         Task DeletePropertyImageAsync(int propertyId, string imageUrl);
+        Task AddPropertyAsync(DTOs.Request.PropertyRequestDto dto, string userId);
     }
 }

@@ -290,14 +290,19 @@ namespace RealEstate_WebAPI.Services.Implementation
             return $"/images/properties/{propertyId}/{fileName}";
         }
 
-        //Task<PropertySearchFilterDTO> IPropertyService.SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        Task<PropertySearchFilterDTO> IPropertyService.SearchPropertiesAsync(PropertySearchFilterDTO filter, string userId, int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public Task UpdatePropertyImagesAsync(PropertyImageResponseDTO dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddPropertyAsync(DTOs.Request.PropertyRequestDto dto, string userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

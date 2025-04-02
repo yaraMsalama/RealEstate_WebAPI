@@ -10,6 +10,13 @@ using Microsoft.AspNetCore.Identity;
 using RealEstate_WebAPI.Models;
 using RealEstate_WebAPI.Services.Implementation;
 using System.Net;
+using RealEstate_WebAPI.Repositories;
+using RealEstate_WebAPI.Infrastructure.Repositories;
+using RealEstate_WebAPI.Repositories.Implementation;
+using RealEstate_WebAPI.Repositories.Interfaces;
+using RealEstate_WebAPI.Services.Interfaces;
+using AutoMapper;
+using RealEstate_WebAPI.Mapping;
 
 namespace RealEstate_WebAPI
 {
@@ -30,6 +37,28 @@ namespace RealEstate_WebAPI
             // Configure database context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Register all repositories
+            builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            builder.Services.AddScoped<IAgentRepository, AgentRepository>();
+            builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+            builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+            builder.Services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
+            builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+            builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            // Register all services
+            // Register all services
+            builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
+            builder.Services.AddScoped<IAgentService, AgentService>();
+            builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
+            builder.Services.AddScoped<IPropertyService, PropertyService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             // Add authentication (JWT)
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -56,9 +85,6 @@ namespace RealEstate_WebAPI
                     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
-
-            // Register custom services
-            builder.Services.AddScoped<IPropertyService, PropertyService>();
 
             // Configure Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -109,6 +135,7 @@ namespace RealEstate_WebAPI
             app.Run();
         }
     }
+
     public static class ExceptionMiddlewareExtensions
     {
         public static IApplicationBuilder UseExceptionMiddleware(this IApplicationBuilder builder)
@@ -116,6 +143,7 @@ namespace RealEstate_WebAPI
             return builder.UseMiddleware<ExceptionMiddleware>();
         }
     }
+
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
