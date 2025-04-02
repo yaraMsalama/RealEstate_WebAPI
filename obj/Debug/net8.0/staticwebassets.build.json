@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wLw9tAOE5sMi258CrmLhcU6rPrnYAP9KDRefEdbjm+w=",
+  "Hash": "2wM1+Co+Ij5aT4uCMduyuRTf0IxuPXgxvGvm6xjd4yo=",
   "Source": "RealEstate_WebAPI",
   "BasePath": "_content/RealEstate_WebAPI",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "71yqopu0qg",
-      "Integrity": "yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y=",
+      "Fingerprint": "01hmcxmh8c",
+      "Integrity": "tE9IAcxE4VhwueFOa5VkA64I6loV8Cyf4hNv2Q9WY3U=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\api-tester.html"
@@ -40,7 +40,7 @@
   ],
   "Endpoints": [
     {
-      "Route": "api-tester.71yqopu0qg.html",
+      "Route": "api-tester.01hmcxmh8c.html",
       "AssetFile": "C:\\Users\\ts\\Source\\Repos\\RealEstate_WebAPI\\YAR\\wwwroot\\api-tester.html",
       "Selectors": [],
       "ResponseHeaders": [
@@ -50,7 +50,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30380"
+          "Value": "30411"
         },
         {
           "Name": "Content-Type",
@@ -58,11 +58,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y=\""
+          "Value": "\"tE9IAcxE4VhwueFOa5VkA64I6loV8Cyf4hNv2Q9WY3U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Apr 2025 01:28:32 GMT"
+          "Value": "Wed, 02 Apr 2025 02:01:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -72,7 +72,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "71yqopu0qg"
+          "Value": "01hmcxmh8c"
         },
         {
           "Name": "label",
@@ -80,7 +80,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y="
+          "Value": "sha256-tE9IAcxE4VhwueFOa5VkA64I6loV8Cyf4hNv2Q9WY3U="
         }
       ]
     },
@@ -95,7 +95,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30380"
+          "Value": "30411"
         },
         {
           "Name": "Content-Type",
@@ -103,11 +103,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y=\""
+          "Value": "\"tE9IAcxE4VhwueFOa5VkA64I6loV8Cyf4hNv2Q9WY3U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 02 Apr 2025 01:28:32 GMT"
+          "Value": "Wed, 02 Apr 2025 02:01:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -117,7 +117,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y="
+          "Value": "sha256-tE9IAcxE4VhwueFOa5VkA64I6loV8Cyf4hNv2Q9WY3U="
         }
       ]
     }
