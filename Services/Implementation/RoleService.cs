@@ -153,6 +153,7 @@ namespace RealEstate_WebAPI.Services
                         UserId = userRole.UserId
                         
                         = userRole.UserName,
+
                         UserRoles = allRoles.Select(r => new RoleSelection
                         {
                             RoleId = r.Id,
