@@ -25,6 +25,13 @@ namespace RealEstate_WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add logging services
+            builder.Services.AddLogging(logging =>
+            {
+                logging.AddConsole(); // Logs to console
+                logging.AddDebug();   // Logs to debug output
+            });
+
             // Add services to the container.
             builder.Services.AddControllers();
 
@@ -124,7 +131,7 @@ namespace RealEstate_WebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseExceptionMiddleware(); // Custom exception handling
+            app.UseExceptionMiddleware(); // Custom exception handling with logging
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
             app.UseAuthentication();
@@ -147,10 +154,12 @@ namespace RealEstate_WebAPI
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger; // Add ILogger
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _next = next;
+            _logger = logger; // Inject logger
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -161,6 +170,7 @@ namespace RealEstate_WebAPI
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "An unhandled exception occurred while processing the request.");
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
@@ -170,11 +180,11 @@ namespace RealEstate_WebAPI
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            return context.Response.WriteAsync(new
+            return context.Response.WriteAsync(JsonSerializer.Serialize(new
             {
                 StatusCode = context.Response.StatusCode,
                 Message = "Internal Server Error from the custom middleware."
-            }.ToString());
+            }));
         }
     }
 }

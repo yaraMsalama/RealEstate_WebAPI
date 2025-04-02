@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "ManifestType": "Build",
+  "Endpoints": [
+    {
+      "Route": "api-tester.71yqopu0qg.html",
+      "AssetFile": "api-tester.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30380"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 01:28:32 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "71yqopu0qg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y="
+        },
+        {
+          "Name": "label",
+          "Value": "api-tester.html"
+        }
+      ]
+    },
+    {
+      "Route": "api-tester.html",
+      "AssetFile": "api-tester.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30380"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 01:28:32 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yypCjkCNvYYue2PpKCkK/wvXXn+2P6lcUqENtXre26Y="
+        }
+      ]
+    }
+  ]
+}
